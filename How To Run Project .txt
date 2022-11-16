@@ -1,0 +1,6 @@
+1- install jdk 1.8
+2- add java to path
+3- install intellij idea editor 
+4- download project 
+5- open testng.xml 
+6- right click and run
