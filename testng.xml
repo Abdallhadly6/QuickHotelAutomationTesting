@@ -5,10 +5,21 @@
             <classes>
                 <class name="TestCases.Config"></class>
 
-                 <!--<class name="TestCases.HotelPageTest"></class>-->
+                <!--
                 <class name="TestCases.LoginPageTest"></class>
-               <!--<class name="TestCases.HomePageTest"></class>-->
-                <class name="TestCases.AccountPageTest"></class>
+                <class name="TestCases.HomePageTest"></class>
+                 <class name="TestCases.AccountPageTest"></class>
+                <class name="TestCases.HotelPageTest"></class>
+                <class name="TestCases.UserPageTest">
+                    <methods>
+                        <exclude name="addNewUser"></exclude>
+                    </methods>
+
+                       <class name="TestCases.TaxPageTest">
+
+                </class>
+                </class>-->
+
 
                <class name="TestCases.ServicesPageTest">
                    <methods>

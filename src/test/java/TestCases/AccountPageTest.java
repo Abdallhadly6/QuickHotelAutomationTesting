@@ -45,11 +45,14 @@ public class AccountPageTest extends TestBase {
     public void checkAccountEditData(String name) throws IOException, InterruptedException {
         homePage.clickSettings();
         homePage.clickAccount();
-        accountPage.updateData(name);
+        String temp =  name + TestUtils.getCounter();
+        TestUtils.updateCounter();
+        accountPage.updateData(temp);
         accountPage.clickSubmit();
         accountPage.acceptAlert();
-        accountPage.checkSuccessOfUpdate();
-        Assert.assertEquals(accountPage.updatedData().get(0), name);
+        driver.navigate().refresh();
+        Thread.sleep(1000);
+        Assert.assertEquals(accountPage.updatedData().get(0), temp);
     }
 
     @DataProvider

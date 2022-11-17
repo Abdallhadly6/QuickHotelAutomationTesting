@@ -11,12 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.asserts.SoftAssert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -27,12 +29,10 @@ public class TestBase {
     protected static Properties properties;
     public static ExtentReports extentReports;
     public static ExtentTest log;
-
     public TestBase() throws IOException {
         properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream("src/main/java/Config/config.properties");
         properties.load(fileInputStream);
-
     }
 
     public static void initialization(){

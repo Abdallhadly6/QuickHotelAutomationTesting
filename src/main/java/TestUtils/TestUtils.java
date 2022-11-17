@@ -4,9 +4,9 @@ import Base.TestBase;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
+import java.io.*;
+import java.util.Scanner;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,10 +20,10 @@ public class TestUtils extends TestBase {
     }
 
     public static void screenShot(String name ) throws IOException {
-        File shot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(shot, new File("QuickHotelTestReport\\"+name+".png"));
-        //Screenshot screeshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
-        //ImageIO.write(screeshot.getImage(),"PNG",new File("QuickHotelTestReport\\"+name+".png"));
+        //File shot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //FileUtils.copyFile(shot, new File("QuickHotelTestReport\\"+name+".png"));
+        Screenshot screeshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
+        ImageIO.write(screeshot.getImage(),"PNG",new File("QuickHotelTestReport\\"+name+".png"));
     }
 
     public static Object[][] getDatFromExcel(String sheetName) throws IOException {
@@ -43,4 +43,28 @@ public class TestUtils extends TestBase {
         workbook.close();
         return data;
     }
+
+    public static String getCounter() throws FileNotFoundException {
+        String data = null;
+        File myObj = new File("Files\\counter.txt");
+        Scanner myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()){
+            data = myReader.nextLine();
+        }
+        myReader.close();
+        return data;
+    }
+
+    public static void updateCounter() throws IOException {
+        int temp = Integer.parseInt(getCounter());
+        FileWriter fw = new FileWriter("Files\\counter.txt");
+        fw.write(Integer.toString(temp+1));
+        fw.close();
+    }
+
+//    public static void main (String [] args) throws IOException {
+//        System.out.println(getCounter());
+//        updateCounter();
+//        System.out.println(getCounter());
+//    }
 }

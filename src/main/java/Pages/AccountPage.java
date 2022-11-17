@@ -1,12 +1,16 @@
 package Pages;
 
 import Base.TestBase;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 
 public class AccountPage extends TestBase {
@@ -18,6 +22,7 @@ public class AccountPage extends TestBase {
 
     HomePage homePage = new HomePage();
     LoginPage loginPage = new LoginPage();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
     @FindBy(id = "uname")
     WebElement nameField;
@@ -37,17 +42,9 @@ public class AccountPage extends TestBase {
     }
 
     public void acceptAlert() throws InterruptedException {
-        //submit
-        driver.switchTo().alert().accept();
-    }
-
-    public void checkSuccessOfUpdate() throws InterruptedException {
-        homePage.clickLogOut();
-        loginPage.enterData(properties.getProperty("userId"),properties.getProperty("userPassword"));
-        loginPage.clickLogin();
-        homePage.clickSettings();
-        homePage.clickAccount();
-        Thread.sleep(2000);
+        //alert
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
     }
 
     public ArrayList<String> updatedData() {

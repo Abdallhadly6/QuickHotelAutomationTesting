@@ -45,17 +45,19 @@ public class LoginPageTest extends TestBase {
 
 
     @Test(dataProvider = "InValidUserAndPassword")
-    public void InValidUserIdAndPassword(String user , String pass) throws IOException {
+    public void InValidUserIdAndPassword(String user , String pass) throws IOException, InterruptedException {
         loginPage.enterData(user,pass);
         loginPage.clickLogin();
+        loginPage.acceptAlert();
         Assert.assertTrue(loginPage.getForgetPass());
 
     }
 
     @Test(dataProvider = "InValidUserAndValidPassword")
-    public void inValidUserIdAndValidPassword(String user , String pass) throws IOException {
+    public void inValidUserIdAndValidPassword(String user , String pass) throws IOException, InterruptedException {
         loginPage.enterData(user,pass);
         loginPage.clickLogin();
+        loginPage.acceptAlert();
         Assert.assertTrue(loginPage.getForgetPass());
     }
 
@@ -63,6 +65,7 @@ public class LoginPageTest extends TestBase {
     public void validUserIdAnInValidPassword(String user , String pass) throws IOException, InterruptedException {
         loginPage.enterData(user,pass);
         loginPage.clickLogin();
+        loginPage.acceptAlert();
         Assert.assertTrue(loginPage.getForgetPass());
     }
 

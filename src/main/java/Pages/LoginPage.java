@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends TestBase {
@@ -23,6 +24,7 @@ public class LoginPage extends TestBase {
 
 
     JavascriptExecutor js =( (JavascriptExecutor) driver);
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     //
     @FindBy(id = "username")
     WebElement userId;
@@ -35,20 +37,6 @@ public class LoginPage extends TestBase {
 
     @FindBy(xpath = "/html/body/app-root/div/main/app-login/div/div/div/div[2]/div/div/form/div[3]/div/span/a")
     WebElement forgetPass;
-
-    @FindBy(xpath = "//*[@id=\"dropdownBasic1\"]/img")
-    WebElement LanguageIcon1;
-
-    @FindBy(xpath = "/html/body/app-root/div/main/app-login/app-hheader/div/div/div[1]/div/div/div/div[2]/nav/ul/li[5]/div/div/a")
-    WebElement LanguageIcon2;
-
-
-    @FindBy(xpath = "/html/body/app-root/div/main/app-login/div/div/div/div[2]/div/div/h5")
-    WebElement LanguageCheck;
-
-
-
-
 
 
     public void enterData(String user , String pass){
@@ -66,6 +54,12 @@ public class LoginPage extends TestBase {
     public boolean getForgetPass() {
         //
         return forgetPass.isDisplayed();
+    }
+
+    public void acceptAlert() throws InterruptedException {
+        //alert
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
     }
 
 }

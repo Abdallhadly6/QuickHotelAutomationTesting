@@ -6,11 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.time.Duration;
 
 public class ServicesPage extends TestBase {
 
@@ -19,6 +21,7 @@ public class ServicesPage extends TestBase {
         PageFactory.initElements(driver, this);
     }
 
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     @FindBy(id = "aname")
     WebElement aName;
 

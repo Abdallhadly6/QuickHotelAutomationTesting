@@ -1,11 +1,13 @@
 package Pages;
 
 import Base.TestBase;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.io.IOException;
+import java.util.List;
 
 public class HomePage extends TestBase {
 
@@ -44,8 +46,9 @@ public class HomePage extends TestBase {
 
 
     public boolean getLogOutLink() {
+        List<WebElement> list = driver.findElements(By.xpath("/html/body/app-root/div/main/app-layout/div/app-admintopbar/div/div/div/nav/div/ul/li[2]/a"));
         boolean temp = false;
-        if(buttonLogOut.isDisplayed()){
+        if(list.size()>0){
             return true;
         }
         return temp;
@@ -84,6 +87,16 @@ public class HomePage extends TestBase {
     public void clickUsers(){
         //users
         buttonUsers.click();
+    }
+
+    public void clickTax(){
+        //users
+        buttonTax.click();
+    }
+
+    public void clickTaxGroup(){
+        //users
+        buttonTaxGroup.click();
     }
 
 

@@ -43,15 +43,17 @@ public class HotelPageTest extends TestBase {
     }
 
     @Test(dataProvider = "hotelData")
-    public void checkHotelEditData(String eDesc, String aDesc) throws IOException, InterruptedException {
+    public void checkHotelEditData(String eDesc) throws IOException, InterruptedException {
         homePage.clickSettings();
         homePage.clickHotel();
-        hotelPage.updateData(eDesc,aDesc);
+        String temp =  eDesc + TestUtils.getCounter();
+        TestUtils.updateCounter();
+        hotelPage.updateData(temp);
         hotelPage.clickSubmit();
         hotelPage.acceptAlert();
-        hotelPage.checkSuccessOfUpdate();
-        Assert.assertEquals(hotelPage.updatedData().get(0), eDesc);
-        Assert.assertEquals(hotelPage.updatedData().get(1), aDesc);
+        driver.navigate().refresh();
+        Thread.sleep(1000);
+        Assert.assertEquals(hotelPage.updatedData().get(0), temp);
     }
 
     @DataProvider
