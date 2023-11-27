@@ -1,11 +1,12 @@
 package TestCases;
 
 import Base.TestBase;
+import Pages.GuestPage;
 import Pages.HomePage;
 import Pages.LoginPage;
-import Pages.ServicesPage;
-import Pages.TaxPage;
+import Pages.RoomPage;
 import TestUtils.TestUtils;
+import com.google.zxing.NotFoundException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -18,16 +19,17 @@ import org.testng.annotations.Test;
 import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.util.List;
 
-public class TaxPageTest extends TestBase {
-    public TaxPageTest() throws IOException {
+public class GuestPageTest extends TestBase {
+    public GuestPageTest() throws IOException {
         super();
     }
 
     LoginPage loginPage;
     HomePage homePage;
-    TaxPage taxPage;
+    GuestPage guestPage;
 
     @BeforeMethod
     public void beforeMethod(Method method) throws IOException {
@@ -35,10 +37,12 @@ public class TaxPageTest extends TestBase {
         initialization();
         loginPage = new LoginPage();
         homePage = new HomePage();
-        taxPage = new TaxPage();
+        guestPage = new GuestPage();
+
         // login first
         loginPage.enterData(properties.getProperty("userId"),properties.getProperty("userPassword"));
         loginPage.clickLogin();
+
     }
 
     @AfterMethod
@@ -46,35 +50,25 @@ public class TaxPageTest extends TestBase {
         tearDown(method,result);
     }
 
-    @Test(dataProvider = "addNewTax")
-    public void addNewTax(String arabicName , String englishName) throws IOException, AWTException, InterruptedException {
-        homePage.clickSettings();
-        homePage.clickTax();
-        String temp = TestUtils.getCounter() + englishName;
+    @Test()
+    public void addNewGuest() throws IOException, AWTException, InterruptedException {
+        homePage.clickRoomAndGuests();
+        homePage.clickGuest();
+        String temp = "05478947" + TestUtils.getCounter();
         TestUtils.updateCounter();
-        taxPage.enterTaxeData(arabicName,temp , "25");
-        taxPage.clickSubmit();
-        driver.navigate().refresh();
-        Thread.sleep(1000);
-        List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + temp + "')]"));
+        guestPage.enterGuestData("auto" , temp);
+        guestPage.clickSubmit();
+        java.util.List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + temp + "')]"));
         Assert.assertTrue(list.size() > 0);
     }
 
     @Test()
-    public void updateTaxData() throws IOException, AWTException, InterruptedException {
-        homePage.clickSettings();
-        homePage.clickTax();
-        taxPage.clickEdit();
-        taxPage.updateData();
-        Assert.assertTrue(taxPage.updatedData().size() > 0);
-    }
-
-    @DataProvider
-    public Object[][] addNewTax() throws IOException {
-        Object[][] data = TestUtils.getDatFromExcel("addnewtax");
-        return data;
-
+    public void updateGuestData() throws IOException, AWTException, InterruptedException {
+        homePage.clickRoomAndGuests();
+        homePage.clickGuest();
+        guestPage.clickEdit();
+        guestPage.updateData();
+        Assert.assertTrue(guestPage.updatedData().size() > 0);
     }
 
 }
-

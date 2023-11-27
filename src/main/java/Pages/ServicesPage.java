@@ -50,7 +50,6 @@ public class ServicesPage extends TestBase {
         aName.sendKeys(arabicName);
         eName.clear();
         eName.sendKeys(EnglishName);
-
     }
 
     public void uploadPhoto() throws AWTException, InterruptedException {

@@ -1,9 +1,9 @@
 package TestCases;
 
 import Base.TestBase;
+import Pages.CategoryPage;
 import Pages.HomePage;
 import Pages.LoginPage;
-import Pages.ServicesPage;
 import TestUtils.TestUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,14 +19,14 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class ServicesPageTest extends TestBase {
-    public ServicesPageTest() throws IOException {
+public class CategoryPageTest extends TestBase {
+    public CategoryPageTest() throws IOException {
         super();
     }
 
     LoginPage loginPage;
     HomePage homePage;
-    ServicesPage servicesPage;
+    CategoryPage categoryPage;
 
     @BeforeMethod
     public void beforeMethod(Method method) throws IOException {
@@ -34,7 +34,7 @@ public class ServicesPageTest extends TestBase {
         initialization();
         loginPage = new LoginPage();
         homePage = new HomePage();
-        servicesPage = new ServicesPage();
+        categoryPage = new CategoryPage();
         // login first
         loginPage.enterData(properties.getProperty("userId"),properties.getProperty("userPassword"));
         loginPage.clickLogin();
@@ -45,38 +45,37 @@ public class ServicesPageTest extends TestBase {
         tearDown(method,result);
     }
 
-    @Test(dataProvider = "addNewService")
-    public void addNewService(String arabicName , String englishName) throws IOException, AWTException, InterruptedException {
+    @Test()
+    public void addNewCategory() throws IOException, AWTException, InterruptedException {
         homePage.clickMenu();
-        homePage.clickServices();
-        servicesPage.enterServiceData(arabicName,englishName);
-        servicesPage.uploadPhoto();
-        Thread.sleep(5000);
-        servicesPage.clickSubmit();
-        List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + arabicName + "')]"));
+        homePage.clickCategories();
+        String englishName = "englishName" + TestUtils.getCounter();
+        TestUtils.updateCounter();
+        categoryPage.enterCategoryData("arabicName",englishName);
+        categoryPage.clickSubmit();
+        java.util.List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + englishName + "')]"));
         Assert.assertTrue(list.size() > 0);
-
     }
 
     @Test()
-    public void updateServiceData() throws IOException, AWTException, InterruptedException {
+    public void updateCategoryData() throws IOException, AWTException, InterruptedException {
         homePage.clickMenu();
-        homePage.clickServices();
-        servicesPage.clickEdit();
+        homePage.clickCategories();
         String temp = "update" + TestUtils.getCounter();
         TestUtils.updateCounter();
-        servicesPage.enterServiceData("تحديث",temp);
-        servicesPage.clickSubmit();
-        driver.navigate().refresh();
+        categoryPage.updateCategory("تحديث",temp);
         List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + temp + "')]"));
         Assert.assertTrue(list.size() > 0);
     }
 
-    @DataProvider
-    public Object[][] addNewService() throws IOException {
-        Object[][] data = TestUtils.getDatFromExcel("addnewservice");
-        return data;
-
+    @Test()
+    public void deleteCategory() throws IOException, AWTException, InterruptedException {
+        homePage.clickMenu();
+        homePage.clickCategories();
+        categoryPage.deleteCategory();
+        List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + categoryPage.categoryName() + "')]"));
+        System.out.println(categoryPage.categoryName());
+        Assert.assertFalse(list.size() > 0);
     }
 
 }

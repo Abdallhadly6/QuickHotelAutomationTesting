@@ -1,7 +1,10 @@
 package Pages;
 
 import Base.TestBase;
+import TestUtils.TestUtils;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
 
 public class UserPage extends TestBase {
 
@@ -50,6 +54,11 @@ public class UserPage extends TestBase {
     @FindBy(xpath= "//*[td[7]]//*//*//*//*//*")
     WebElement checkIcon;
 
+    @FindBy(xpath = "/html/body/app-root/div/main/app-layout/div/div/div/div[2]/app-internaluser/div[3]/div/div/div/table/tbody/tr[5]/td[8]")
+    WebElement edit;
+
+    ArrayList<WebElement> list = new ArrayList<>();
+
 
     public void enterUserData(String namef , String unamef , String emailf , String pass1f , String pass2f , String phonef) throws InterruptedException {
         Thread.sleep(2000);
@@ -78,9 +87,33 @@ public class UserPage extends TestBase {
         phone.sendKeys(phonef);
     }
 
+    public void updateData() throws IOException, InterruptedException {
+        String temp =    "edit" +  TestUtils.getCounter();
+        TestUtils.updateCounter();
+        uname.clear();
+        uname.sendKeys(temp);
+        clickSubmit();
+        clickSubmit();
+        acceptAlert();
+        driver.navigate().refresh();
+        Thread.sleep(1000);
+        list = (ArrayList<WebElement>) driver.findElements(By.xpath("//*[contains(text(),'" + temp + "')]"));
+    }
+
+    public ArrayList<WebElement> updatedData() {
+        return list;
+    }
+
     public void clickSubmit(){
         //submit
         submit.click();
+    }
+
+    public void clickEdit() throws InterruptedException {
+        //edit
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].scrollIntoView(true);", edit);
+        jse.executeScript("arguments[0].click()", edit);
     }
 
     public void acceptAlert() throws InterruptedException {
@@ -96,6 +129,7 @@ public class UserPage extends TestBase {
     }
 
     public String getStatus(){
+        //status
         return checkIcon.getAttribute("data-icon");
     }
 

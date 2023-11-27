@@ -3,7 +3,8 @@ package TestCases;
 import Base.TestBase;
 import Pages.HomePage;
 import Pages.LoginPage;
-import Pages.ServicesPage;
+import Pages.TaxGroupPage;
+import Pages.TaxPage;
 import TestUtils.TestUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,14 +20,14 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class ServicesPageTest extends TestBase {
-    public ServicesPageTest() throws IOException {
+public class TaxGroupPageTest extends TestBase {
+    public TaxGroupPageTest() throws IOException {
         super();
     }
 
     LoginPage loginPage;
     HomePage homePage;
-    ServicesPage servicesPage;
+    TaxGroupPage taxGroupPage;
 
     @BeforeMethod
     public void beforeMethod(Method method) throws IOException {
@@ -34,7 +35,7 @@ public class ServicesPageTest extends TestBase {
         initialization();
         loginPage = new LoginPage();
         homePage = new HomePage();
-        servicesPage = new ServicesPage();
+        taxGroupPage = new TaxGroupPage();
         // login first
         loginPage.enterData(properties.getProperty("userId"),properties.getProperty("userPassword"));
         loginPage.clickLogin();
@@ -45,36 +46,33 @@ public class ServicesPageTest extends TestBase {
         tearDown(method,result);
     }
 
-    @Test(dataProvider = "addNewService")
-    public void addNewService(String arabicName , String englishName) throws IOException, AWTException, InterruptedException {
-        homePage.clickMenu();
-        homePage.clickServices();
-        servicesPage.enterServiceData(arabicName,englishName);
-        servicesPage.uploadPhoto();
-        Thread.sleep(5000);
-        servicesPage.clickSubmit();
-        List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + arabicName + "')]"));
-        Assert.assertTrue(list.size() > 0);
 
-    }
-
-    @Test()
-    public void updateServiceData() throws IOException, AWTException, InterruptedException {
-        homePage.clickMenu();
-        homePage.clickServices();
-        servicesPage.clickEdit();
-        String temp = "update" + TestUtils.getCounter();
+    @Test(dataProvider = "addNewTaxGroup")
+    public void addNewTaxGroup(String arabicName , String englishName) throws IOException, AWTException, InterruptedException {
+        homePage.clickSettings();
+        homePage.clickTaxGroup();
+        String temp = TestUtils.getCounter() + englishName;
         TestUtils.updateCounter();
-        servicesPage.enterServiceData("تحديث",temp);
-        servicesPage.clickSubmit();
+        taxGroupPage.enterTaxGroupData(arabicName,temp);
+        taxGroupPage.clickSubmit();
         driver.navigate().refresh();
+        Thread.sleep(1000);
         List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(),'" + temp + "')]"));
         Assert.assertTrue(list.size() > 0);
     }
 
+    @Test()
+    public void updateTaxGroupData() throws IOException, AWTException, InterruptedException {
+        homePage.clickSettings();
+        homePage.clickTaxGroup();
+        taxGroupPage.clickEdit();
+        taxGroupPage.updateData();
+        Assert.assertTrue(taxGroupPage.updatedData().size() > 0);
+    }
+
     @DataProvider
-    public Object[][] addNewService() throws IOException {
-        Object[][] data = TestUtils.getDatFromExcel("addnewservice");
+    public Object[][] addNewTaxGroup() throws IOException {
+        Object[][] data = TestUtils.getDatFromExcel("addnewtaxgroup");
         return data;
 
     }

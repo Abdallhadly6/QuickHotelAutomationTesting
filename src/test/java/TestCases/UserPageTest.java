@@ -91,6 +91,18 @@ public class UserPageTest extends TestBase {
     }
 
 
+    @Test()
+    public void updateUserData() throws IOException, AWTException, InterruptedException {
+        // login first
+        loginPage.enterData(properties.getProperty("userId"),properties.getProperty("userPassword"));
+        loginPage.clickLogin();
+
+        homePage.clickSettings();
+        homePage.clickUsers();
+        userPage.clickEdit();
+        userPage.updateData();
+        Assert.assertTrue(userPage.updatedData().size() > 0);
+    }
 
     @DataProvider
     public Object[][] addNewUser() throws IOException {

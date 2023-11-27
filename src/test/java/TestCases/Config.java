@@ -30,8 +30,6 @@ public class Config extends TestBase {
         extentReports = new ExtentReports("QuickHotelTestReport\\QuickHotelReport.html" , true);
         extentReports.addSystemInfo("Project","Quick Hotel");
         FileUtils.cleanDirectory(new File("QuickHotelTestReport"));
-
-
     }
 
     @AfterSuite

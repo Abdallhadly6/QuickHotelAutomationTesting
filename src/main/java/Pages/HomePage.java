@@ -19,12 +19,8 @@ public class HomePage extends TestBase {
     @FindBy(xpath = "/html/body/app-root/div/main/app-layout/div/app-admintopbar/div/div/div/nav/div/ul/li[2]/a")
     WebElement buttonLogOut;
 
-    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/button[5]")
-    WebElement buttonMenu;
 
-    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[5]/a[1]")
-    WebElement buttonServices;
-
+    ////   settings
     @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/button[2]")
     WebElement buttonSettings;
 
@@ -45,6 +41,48 @@ public class HomePage extends TestBase {
 
 
 
+    ////   rooms
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/button[3]")
+    WebElement buttonRoomsAndGuests;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[3]/a[1]")
+    WebElement buttonRooms;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[3]/a[2]")
+    WebElement buttonGuests;
+
+
+    ////   booking
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/button[4]")
+    WebElement buttonBookingMenu;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[4]/a[1]")
+    WebElement buttonBooking;
+
+
+    ////   menu
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/button[5]")
+    WebElement buttonMenu;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[5]/a[1]")
+    WebElement buttonServices;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[5]/a[2]")
+    WebElement buttonCategories;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[5]/a[3]")
+    WebElement buttonItems;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[5]/a[4]")
+    WebElement buttonAttributes;
+
+    @FindBy(xpath = "//*[@id=\"mySidebar\"]/div/div[5]/a[5]")
+    WebElement buttonAttributeDetails;
+
+
+
+
+
     public boolean getLogOutLink() {
         List<WebElement> list = driver.findElements(By.xpath("/html/body/app-root/div/main/app-layout/div/app-admintopbar/div/div/div/nav/div/ul/li[2]/a"));
         boolean temp = false;
@@ -59,15 +97,6 @@ public class HomePage extends TestBase {
         buttonLogOut.click();
     }
 
-    public void clickMenu(){
-        //menu
-        buttonMenu.click();
-    }
-
-    public void clickServices(){
-        //services
-        buttonServices.click();
-    }
 
     public void clickSettings(){
         //settings
@@ -97,6 +126,62 @@ public class HomePage extends TestBase {
     public void clickTaxGroup(){
         //users
         buttonTaxGroup.click();
+    }
+
+
+    public void clickRoomAndGuests(){
+        //users
+        buttonRoomsAndGuests.click();
+    }
+
+    public void clickRoom(){
+        //users
+        buttonRooms.click();
+    }
+
+    public void clickGuest(){
+        //users
+        buttonGuests.click();
+    }
+
+    public void clickBookingMenu(){
+        //users
+        buttonBookingMenu.click();
+    }
+
+    public void clickBooking(){
+        //users
+        buttonBooking.click();
+    }
+
+    public void clickMenu(){
+        //menu
+        buttonMenu.click();
+    }
+
+    public void clickServices(){
+        //services
+        buttonServices.click();
+    }
+
+    public void clickCategories(){
+        //services
+        buttonCategories.click();
+    }
+
+    public void clickItems(){
+        //services
+        buttonItems.click();
+    }
+
+    public void clickAttributes(){
+        //services
+        buttonAttributes.click();
+    }
+
+    public void clickAttributeDetails(){
+        //services
+        buttonAttributeDetails.click();
     }
 
 

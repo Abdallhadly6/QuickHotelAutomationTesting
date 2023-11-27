@@ -38,10 +38,11 @@ public class TestBase {
     public static void initialization(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
+        options.addArguments("--remote-allow-origins=*");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20 , TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10 , TimeUnit.SECONDS);
         driver.get(properties.getProperty("url"));
 
 

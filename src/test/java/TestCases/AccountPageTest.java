@@ -51,7 +51,7 @@ public class AccountPageTest extends TestBase {
         accountPage.clickSubmit();
         accountPage.acceptAlert();
         driver.navigate().refresh();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         Assert.assertEquals(accountPage.updatedData().get(0), temp);
     }
 

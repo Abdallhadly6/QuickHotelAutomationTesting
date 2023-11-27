@@ -5,28 +5,87 @@
             <classes>
                 <class name="TestCases.Config"></class>
 
-                <!--
-                <class name="TestCases.LoginPageTest"></class>
-                <class name="TestCases.HomePageTest"></class>
-                 <class name="TestCases.AccountPageTest"></class>
-                <class name="TestCases.HotelPageTest"></class>
-                <class name="TestCases.UserPageTest">
-                    <methods>
-                        <exclude name="addNewUser"></exclude>
-                    </methods>
+                <class name="TestCases.RoomPageTest"></class>
+                <!--<class name="TestCases.LoginPageTest"></class>
 
-                       <class name="TestCases.TaxPageTest">
+               <class name="TestCases.HomePageTest"></class>
+               <class name="TestCases.AccountPageTest"></class>
+               <class name="TestCases.HotelPageTest"></class>
+               <class name="TestCases.TaxPageTest"></class>
+               <class name="TestCases.GuestPageTest"></class>
 
-                </class>
-                </class>-->
+               <class name="TestCases.UserPageTest">
+                   <methods>
+                       <exclude name="addNewUser"></exclude>
+                   </methods>
+               </class>
 
+               <class name="TestCases.TaxGroupPageTest">
+                   <methods>
+                       <exclude name="addNewTaxGroup"></exclude>
+                   </methods>
+               </class>
 
                <class name="TestCases.ServicesPageTest">
+                  <methods>
+                      <exclude name="updateServiceData"></exclude>
+                      <exclude name="addNewService"></exclude>
+                  </methods>
+               </class>
+
+               <class name="TestCases.TaxPageTest">
                    <methods>
-                       <exclude name="updateServiceData"></exclude>
-                       <exclude name="addNewService"></exclude>
+                       <exclude name="addNewTax"></exclude>
                    </methods>
-                </class>
+               </class>
+
+               <class name="TestCases.RoomPageTest">
+                   <methods>
+                       <exclude name="addNewRoom"></exclude>
+                       <exclude name="updateRoomData"></exclude>
+                   </methods>
+               </class>
+
+                 <class name="TestCases.BookingPageTest">
+                   <methods>
+                       <exclude name="addNewBookingOrder"></exclude>
+                       <exclude name="generateQrCodeForBooking"></exclude>
+                       <exclude name="finishBooking"></exclude>
+                   </methods>
+               </class>
+
+               <class name="TestCases.CategoryPageTest">
+                   <methods>
+                       <exclude name="addNewCategory"></exclude>
+                       <exclude name="updateCategoryData"></exclude>
+                   </methods>
+               </class>
+
+               <class name="TestCases.ItemPageTest">
+                   <methods>
+                       <exclude name="addNewItem"></exclude>
+                       <exclude name="updateItemData"></exclude>
+                       <exclude name="addAttributesToItem"></exclude>
+                       <exclude name="deleteItem"></exclude>
+                   </methods>
+               </class>
+
+               <class name="TestCases.AttributePageTest">
+                   <methods>
+                       <exclude name="addNewAttribute"></exclude>
+                       <exclude name="updateAttributeData"></exclude>
+                   </methods>
+               </class>
+
+               <class name="TestCases.AttributeDetailsPageTest">
+                   <methods>
+                       <exclude name="addNewAttributeDetails"></exclude>
+                       <exclude name="updateAttributeDetailsData"></exclude>
+                   </methods>
+               </class>
+               -->
+
+
             </classes>
     </test>
 </suite>

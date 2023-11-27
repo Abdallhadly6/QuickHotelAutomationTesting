@@ -1,15 +1,24 @@
 package TestUtils;
 
 import Base.TestBase;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URL;
 import java.util.Scanner;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
@@ -62,9 +71,23 @@ public class TestUtils extends TestBase {
         fw.close();
     }
 
-//    public static void main (String [] args) throws IOException {
-//        System.out.println(getCounter());
-//        updateCounter();
-//        System.out.println(getCounter());
-//    }
+    public static void main (String [] args) throws IOException, NotFoundException {
+//        WebDriverManager.chromedriver().setup();
+//        WebDriver driver=new ChromeDriver();
+//        driver.get("http://qrcode.meetheed.com/qrcode_examples.php");
+//        driver.manage().window().maximize();
+//        String qrCodeURL=driver.findElement(By.xpath("//img[@src='images/qr_code_con.png']")).getAttribute("src");
+//        System.out.println(qrCodeURL);
+//        //Create an object of URL Class
+//        URL url=new URL(qrCodeURL);
+//        //Pass the URL class object to store the file as image
+//        BufferedImage bufferedimage=ImageIO.read(url);
+//        // Process the image
+//        LuminanceSource luminanceSource=new BufferedImageLuminanceSource(bufferedimage);
+//        BinaryBitmap binaryBitmap=new BinaryBitmap(new HybridBinarizer(luminanceSource));
+//        //To Capture details of QR code
+//        Result result =new MultiFormatReader().decode(binaryBitmap);
+//        System.out.println(result.getText());
+//        driver.close();
+    }
 }
